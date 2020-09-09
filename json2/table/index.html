@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Json Table</title>
+</head>
+
+<body>
+    <script>
+
+        const persons = [
+            {
+                "firstname": "Naimu",
+                "lastname": "Ddin",
+                "dob": "08-09-1995"
+
+            },
+            {
+                "firstname": "Ankit",
+                "lastname": "Chauhan",
+                "dob": "03-04-1996"
+            },
+            {
+                "firstname": "Aditya",
+                "lastname": "Tyagi",
+                "dob": "08-09-1996"
+            },
+            {
+                "firstname": "Naimu",
+                "lastname": "Saifi",
+                "dob": "08-09-1994"
+            },
+            {
+                "firstname": "Ashutosh",
+                "lastname": "kumar",
+                "dob": "08-11-1994"
+            }
+        ]
+        // document.write("Table :")
+        document.write(`<table style = "border : 1px solid #eee; color : #555; font-size : 1rem ; padding : 1%; margin : 1%; " >`)
+        // document.write("<table>")
+        document.write(`<tr style = "border : 1px solid #eee" >`)
+        document.write("<th>  First Name    </th>")
+        document.write("<th>  Last Name    </th>")
+        document.write("<th>Date of Birth  </th>")
+        document.write("</tr>")
+
+        persons.forEach(element => {
+            // document.write(`<tr style = "border : 1px solid #eee" >`)
+
+            document.write(`<td>${element.firstname}</td>`)
+            document.write(`<td>${element.lastname}</td>`)
+            document.write(`<td>${element.dob}</td>`)
+            document.write("</tr>")
+        })
+
+        document.write("</table>")
+
+    </script>
+</body>
+
+</html>

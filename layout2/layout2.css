@@ -1,0 +1,122 @@
+body {
+  margin: 0px;
+  font-family:  sans-serif;
+  color: #777;
+}
+
+.header {
+  padding-left:0%;
+  background: #000;
+  color: #eee;
+}
+
+.header ul {
+  padding-left :5%;
+  margin-top: 0px;
+  list-style: none;
+  display: flex;
+}
+
+.header ul li {
+  color:#aaa;
+  padding: 12px;
+}
+
+.content {
+  margin: 6%;
+}
+
+.footer {
+  margin: 6%;
+}
+
+.content-top {
+  
+  background: #eee;
+  padding: 5%;
+  border-radius: 5px;
+}
+
+.content-top .heading {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.content-bottom {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.label {
+  border: 1px solid #eee;
+  padding: 0.5%;
+  margin: 0.5%;
+  width:47%;
+}
+.label .img-blanks {
+  background: #eee;
+  width: 100%;
+  height: 120px;
+}
+
+.img-content {
+  padding: 6%;
+  text-align: center;
+}
+.img-content .heading {
+  padding-top: 14px;
+  font-size: 20px;
+}
+.img-content p {
+  font-size: 14px;
+}
+.btn {
+  background: #007baf;
+  color: #fff;
+  padding: 7px;
+  border: none;
+  border-radius: 3px;
+}
+
+.btn-white {
+  background: #fff;
+  padding: 7px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+
+.head {
+  font-size: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+
+  .label {
+    border: 1px solid #eee;
+    padding: 0.6%;
+    margin-right: 0.9%;
+    width:22%;
+  }
+  .blue{
+      color : skyblue;
+  }
+  .box {
+      width : 29%;
+      margin: 2%;
+    }
+
+    .box .img-blank {
+      width: 100%;
+      height: 150px;
+      background: #eee;
+    }
+    
+    .box .img-blank img{
+        width: 100%;
+        height:150px;
+    }
+    .main-heading {
+      padding-left: 4%;
+      font-size: 1.6rem;
+    }
+}

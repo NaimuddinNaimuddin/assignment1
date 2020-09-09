@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax Assignment</title>
+</head>
+
+<body>
+
+    <script>
+
+        fetch('./data.json')
+            .then(res => res.json())
+            .then(data => {
+
+                let personsSorted = data.sort((a, b) => {
+                    return new Date(b.date).getTime() - new Date(a.date).getTime()
+                })
+            //   console.log(personsSorted)  
+
+                let persons = []
+                for (let i = 0; i < 5; i++) {
+                    persons.push(personsSorted[i])
+                }
+
+
+                document.write(`<table style = "border : 1px solid #eee; color : #555; font-size : 1rem ; padding : 1%; margin : 1%; " >`)
+                document.write(`<tr style = "border : 1px solid #eee" >`)
+                document.write("<th>  Name    </th>")
+                document.write("<th> Email   </th>")
+                document.write("<th> Message  </th>")
+                document.write("<th> Date  </th>")
+                document.write("</tr>")
+
+                persons.forEach(person => {
+                    document.write(`<td>${person.name}</td>`)
+                    document.write(`<td>${person.email}</td>`)
+                    document.write(`<td>${person.message}</td>`)
+                    document.write(`<td>${person.date}</td>`)
+                    document.write("</tr>")
+                })
+
+                document.write("</table>")
+            })
+
+
+    </script>
+</body>
+
+</html>

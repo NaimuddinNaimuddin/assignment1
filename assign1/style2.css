@@ -1,0 +1,50 @@
+body {
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+  background: #d7e7f4;
+  height: 100vh;
+}
+
+.content {
+  background: #ffffff;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  margin-left: 22px;
+  margin-right: 22px;
+}
+
+.header-left {
+  margin-left: 0px;
+}
+.header-right {
+  margin-left: auto;
+  margin-right: 22px;
+}
+.header-right .login {
+  padding-top: 10px;
+  padding-bottom: 8px;
+  text-align: right;
+  color: #007baf !important;
+  font-weight: 600;
+}
+
+.btn {
+  background: #007baf;
+  color: #fff;
+  padding: 5px;
+  border: none;
+}
+input {
+  padding: 4px;
+  border: 1px solid #eee;
+}
+.link{
+    font-style: underline;
+}

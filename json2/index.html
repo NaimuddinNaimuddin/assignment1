@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSON</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+    </div>
+    <!-- <link src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></link> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+        integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg=="
+        crossorigin="anonymous"></script>
+    <script>
+        // let person = {}
+        fetch('./data.json')
+        // .then(r=> console.log(r))
+            .then(response => response.json())
+            .then(data => {
+                person = data
+                console.log(person)
+                document.write("First Name : ")
+                document.write(person.firstname + "<br>")
+                document.write("Last Name : ")
+                document.write(person.lastname + "<br>")
+                document.write("Date of Birth : ")
+                document.write(person.dob)
+            });
+
+        // import person from './data.js'
+
+        // let person = {
+        //     "firstname": "Naimu",
+        //     "lastname": "Ddin",
+        //     "dob": "08-09-1995"
+        // }
+        // console.log(person)
+        // let person1 = JSON.stringify(person)
+        // console.log(person1)
+        //    let person2 = JSON.parse(person1)
+        //         console.log(person2)
+
+        // let person3 = JSON.stringify(person2)
+        // console.log(person3)
+
+
+    </script>
+</body>
+
+</html>
