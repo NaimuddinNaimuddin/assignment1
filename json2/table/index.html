@@ -7,8 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Json Table</title>
 </head>
+<style>
+    table {
+        /* border : 1px solid #777; */
+        padding: 2%;
+        width: 50%;
+    }
+
+    th,
+    td {
+
+        padding: 1% 2% 1%;
+        border: 1px solid #777;
+    }
+</style>
 
 <body>
+
+    <table id="table">
+        <tr>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> DOB </th>
+        </tr>
+
+    </table>
+
+
     <script>
 
         const persons = [
@@ -39,25 +64,36 @@
                 "dob": "08-11-1994"
             }
         ]
-        // document.write("Table :")
-        document.write(`<table style = "border : 1px solid #eee; color : #555; font-size : 1rem ; padding : 1%; margin : 1%; " >`)
-        // document.write("<table>")
-        document.write(`<tr style = "border : 1px solid #eee" >`)
-        document.write("<th>  First Name    </th>")
-        document.write("<th>  Last Name    </th>")
-        document.write("<th>Date of Birth  </th>")
-        document.write("</tr>")
 
-        persons.forEach(element => {
-            // document.write(`<tr style = "border : 1px solid #eee" >`)
+        persons.forEach(person => {
+            var tr = document.createElement('tr');
 
-            document.write(`<td>${element.firstname}</td>`)
-            document.write(`<td>${element.lastname}</td>`)
-            document.write(`<td>${element.dob}</td>`)
-            document.write("</tr>")
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+            var td3 = document.createElement('td');
+            var td4 = document.createElement('td')
+
+
+            var btn = document.createElement('button')
+            btn.innerHTML = "DELETE";
+
+            td1.appendChild(document.createTextNode(`${person.firstname}`))
+            td2.appendChild(document.createTextNode(`${person.lastname}`));
+            td3.appendChild(document.createTextNode(`${person.dob}`));
+            td4.appendChild(btn);
+
+
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            tr.appendChild(td4)
+
+            document.getElementById('table').appendChild(tr);
         })
 
-        document.write("</table>")
+
+
 
     </script>
 </body>
