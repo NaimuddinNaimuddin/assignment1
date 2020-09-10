@@ -20,80 +20,277 @@
         padding: 1% 2% 1%;
         border: 1px solid #777;
     }
+
+    form {
+        padding: 25px;
+    }
+
+    #my-search {
+        padding-left: 25px;
+    }
 </style>
 
 <body>
 
-    <table id="table">
-        <tr>
-            <th> First Name </th>
-            <th> Last Name </th>
-            <th> DOB </th>
-        </tr>
+    <form action="" onsubmit="event.preventDefault();onFormSubmit()">
+        <div>
+            <label for="">Full Name : </label>
+            <input type="text" name="firstname" id="firstname" required>
+        </div>
+        <div>
+            <label for="">Last Name : </label>
+            <input type="text" name="lastname" id="lastname" required>
+        </div>
+        <div>
+            <label for="">Date of birth : </label>
+            <input type="date" name="dob" id="dob" required>
+        </div>
 
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    <br> <br>
+
+
+    <p id="my-search"> Search : <input id="search-input" type="text"> </p>
+    <!-- <button id="search-btn" onclick="search()"> Search </button> -->
+
+    <table>
+        <thead>
+            <th onClick="sortByFirstName()"> FirstName </th>
+            <th onClick="sortByLastName()"> LastName </th>
+            <th onClick="sortByDob()"> Date of birth </th>
+            <th> </th>
+        </thead>
+
+        <tbody id="table2">
+
+        </tbody>
     </table>
-
 
     <script>
 
-        const persons = [
+        var persons = [
             {
                 "firstname": "Naimu",
                 "lastname": "Ddin",
-                "dob": "08-09-1995"
+                "dob": "1995-09-09"
 
             },
             {
                 "firstname": "Ankit",
                 "lastname": "Chauhan",
-                "dob": "03-04-1996"
+                "dob": "1996-06-04"
             },
             {
                 "firstname": "Aditya",
                 "lastname": "Tyagi",
-                "dob": "08-09-1996"
+                "dob": "1996-04-03"
             },
             {
                 "firstname": "Naimu",
                 "lastname": "Saifi",
-                "dob": "08-09-1994"
+                "dob": "1994-04-05"
             },
             {
-                "firstname": "Ashutosh",
+                "firstname": "naveen",
                 "lastname": "kumar",
-                "dob": "08-11-1994"
+                "dob": "1994-04-04"
+            },
+            {
+                "firstname": "saifi",
+                "lastname": "sam",
+                "dob": "1994-05-03"
+            },
+            {
+                "firstname": "manu",
+                "lastname": "kumar",
+                "dob": "1994-04-03"
+            },
+            {
+                "firstname": "naimu",
+                "lastname": "saifi",
+                "dob": "1994-07-04"
             }
         ]
 
-        persons.forEach(person => {
-            var tr = document.createElement('tr');
+        setList(persons)
 
-            var td1 = document.createElement('td');
-            var td2 = document.createElement('td');
-            var td3 = document.createElement('td');
-            var td4 = document.createElement('td')
+        function setList(group) {
+            clearList()
+            for (const person of group) {
+
+                const trItem = document.createElement('tr')
+
+                const tdItem1 = document.createElement('td')
+                const tdItem2 = document.createElement('td')
+                const tdItem3 = document.createElement('td')
+                const tdItem4 = document.createElement('td')
+
+                const firstname = document.createTextNode(person.firstname)
+                const lastname = document.createTextNode(person.lastname)
+                const dob = document.createTextNode(person.dob)
+
+                var btn = document.createElement('button')
+                btn.innerHTML = "DELETE";
+                btn.addEventListener('click', (e) => { onDelete(e, person) })
+
+                tdItem1.appendChild(firstname)
+                tdItem2.appendChild(lastname)
+                tdItem3.appendChild(dob)
+                tdItem4.appendChild(btn)
+
+                trItem.appendChild(tdItem1)
+                trItem.appendChild(tdItem2)
+                trItem.appendChild(tdItem3)
+                trItem.appendChild(tdItem4)
+
+                document.getElementById('table2').appendChild(trItem);
+            }
+            if (group.length === 0) {
+                setNoResults()
+            }
+        }
+
+        function clearList() {
+            let list = document.getElementById('table2')
+            while (list.firstChild) {
+                list.removeChild(list.firstChild)
+            }
 
 
-//             var btn = document.createElement('button')
-//             btn.innerHTML = "DELETE";
+        }
 
-            td1.appendChild(document.createTextNode(`${person.firstname}`))
-            td2.appendChild(document.createTextNode(`${person.lastname}`));
-            td3.appendChild(document.createTextNode(`${person.dob}`));
-//             td4.appendChild(btn);
+        function setNoResults() {
+            const trItem = document.createElement('tr')
 
+            const tdItem = document.createElement('td')
+            tdItem.appendChild(document.createTextNode('No Results Found.'))
 
+            trItem.appendChild(tdItem)
 
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-            tr.appendChild(td3);
-//             tr.appendChild(td4)
+            document.getElementById('table2').appendChild(trItem);
+        }
 
-            document.getElementById('table').appendChild(tr);
+        const searchInput = document.getElementById('search-input')
+        searchInput.addEventListener('input', (e) => {
+            let value = e.target.value
+            if (value === '') {
+                setList(persons)
+            } else if (value && value.trim().length > 0) {
+                value = value.trim().toLowerCase()
+                setList(persons.filter(person => {
+                    return person.firstname.indexOf(value) !== -1
+                }))
+            } else {
+                clearList()
+            }
         })
 
+        function onFormSubmit() {
 
+            var formData = readFormData()
+            console.log(formData)
+            insertNewRecord(formData)
+            resetForm()
+        }
 
+        function readFormData() {
+            var formData = {}
+            formData['firstname'] = document.getElementById('firstname').value
+            formData['lastname'] = document.getElementById('lastname').value
+            formData['dob'] = document.getElementById('dob').value
+            return formData
+        }
+
+        function insertNewRecord(data) {
+
+            // persons.push(data)
+            persons.unshift(data)
+            // console.log(persons)
+            setList(persons)
+            // var table = document.getElementById('table2')
+            // var newRow = table.insertRow(table.length)
+            // cell1 = newRow.insertCell(0)
+            // cell1.innerHTML = data.firstname
+
+            // cell2 = newRow.insertCell(1)
+            // cell2.innerHTML = data.lastname
+
+            // cell3 = newRow.insertCell(2)
+            // cell3.innerHTML = data.dob
+
+            // cell4 = newRow.insertCell(3)
+            // cell4.innerHTML = `<a onClick="onDelete(this)">DELETE </a>`
+        }
+
+        function resetForm() {
+            document.getElementById('firstname').value = ''
+            document.getElementById('lastname').value = ''
+            document.getElementById('dob').value = ''
+        }
+
+        function onDelete(td, per) {
+
+            const index = persons.indexOf(per)
+            persons.splice(index, 1)
+            console.log(persons)
+
+            setList(persons)
+
+        }
+
+        function sortByFirstName() {
+            sortBy('firstname')
+        }
+        function sortByLastName() {
+            sortBy('lastname')
+        }
+        function sortByDob() {
+            sortBy('dob')
+        }
+
+        var boolean = false
+        function sortBy(by) {
+
+            boolean = !boolean
+
+            if (boolean) {
+
+                function compare(a, b) {
+
+                    const bandA = a[by].toLowerCase();
+                    const bandB = b[by].toLowerCase();
+
+                    let comparison = 0;
+                    if (bandA > bandB) {
+                        comparison = 1;
+                    } else if (bandA < bandB) {
+                        comparison = -1;
+                    }
+                    return comparison;
+                }
+
+                setList(persons.sort(compare))
+            } else {
+                function compare(a, b) {
+
+                    const bandA = a[by].toLowerCase();
+                    const bandB = b[by].toLowerCase();
+
+                    let comparison = 0;
+                    if (bandA < bandB) {
+                        comparison = 1;
+                    } else if (bandA > bandB) {
+                        comparison = -1;
+                    }
+                    return comparison;
+                }
+                setList(persons.sort(compare))
+            }
+        }
 
     </script>
 </body>
